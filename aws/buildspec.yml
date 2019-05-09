@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+
+  build:
+    commands:
+      - echo "Build started on `date`"
+      - echo "build gradle package"
+      - bash -c "source /opt/sdkman/bin/sdkman-init.sh && source /root/.nvm/nvm.sh && gradle build"
+      - cd aws
+      - echo "build mvn package"
+      - bash -c "source /opt/sdkman/bin/sdkman-init.sh && source /root/.nvm/nvm.sh && mvn package"
+      - echo "Running cdk to build env and provision application"
+      - cd ops-environment
+      - bash -c "source /opt/sdkman/bin/sdkman-init.sh && source /root/.nvm/nvm.sh && cdk deploy"
+
+  post_build:
+    commands:
+      - echo "Build completed on `date`"
+
+cache:
+  paths:
+    - '/root/.m2/**/*'
