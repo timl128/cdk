@@ -11,7 +11,7 @@
 
     <modules>
         <module>ops-pipeline</module>
-        <module>ops-environment</module>
+  <!--      <module>ops-environment</module>-->
     </modules>
 
     <properties>
